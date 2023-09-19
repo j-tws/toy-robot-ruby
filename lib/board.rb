@@ -1,11 +1,8 @@
-require 'pry'
-require_relative 'robot'
-
 class Board
-  attr_reader :grid, :rows, :columns, :current_robot_location
+  attr_reader :grid, :rows, :columns, :clean_grid
 
   CELL = '⬜'
-  ROBOT = '🤖'
+  # ROBOT = '🤖'
 
   def initialize(rows, columns)
     raise ArgumentError, 'Argument must be a number' if !rows.is_a?(Numeric) || !columns.is_a?(Numeric)
@@ -16,27 +13,11 @@ class Board
     @grid = Array.new(rows) { Array.new(columns, CELL) }
   end
 
-  def place_robot(robot, x, y)
-    if x > @columns || y > @rows 
-      raise ArgumentError, 'Robot must be within grid confinement'
-    end
-
-    robot.at(x, y)
-    @grid[-y][x - 1] = ROBOT
-  end
-
-  def reset_board
+  def reset
     @grid = Array.new(rows) { Array.new(columns, CELL) }
-  end
-
-  def robot_location_on_board(robot)
-    reset_board
-    @grid[-robot.coordinates.last][robot.coordinates.first - 1] = ROBOT
-    # print_board
   end
 
   def print_board
     puts @grid.map { |row| row.join(' ') }
   end
-  pry
 end

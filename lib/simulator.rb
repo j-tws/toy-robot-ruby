@@ -2,7 +2,6 @@ require_relative 'board'
 require_relative 'robot'
 require 'pry'
 
-
 class Simulator
   attr_reader :robot, :board
 
@@ -11,6 +10,8 @@ class Simulator
     R: :turn_right,
     A: :advance,
   }
+
+  ROBOT = '🤖'
 
   def initialize
     @robot = Robot.new
@@ -25,10 +26,18 @@ class Simulator
   end
 
   def place(x:, y:, direction:)
-    @board.place_robot(x, y)
+    if x > @board.columns || y > @board.rows || x < 1 || y < 1 
+      raise ArgumentError, 'Robot must be within grid confinement'
+    end
 
+    @board.grid[-y][x - 1] = ROBOT
     @robot.at(x, y)
     @robot.orient(direction)
+  end
+
+  def update_robot_location_on_board
+    @board.reset
+    @board.grid[-@robot.coordinates.last][@robot.coordinates.first - 1] = ROBOT
   end
 
   def evaluate(commands)
@@ -38,5 +47,5 @@ class Simulator
       @robot.send(instruction)
     end
   end
-  # pry
+  pry
 end
