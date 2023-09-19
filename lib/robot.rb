@@ -22,7 +22,9 @@ class Robot
     @bearing = DIRECTION[next_direction]
   end
 
-  def at(x, y)
+  def at(x, y, board)
+    raise ArgumentError, 'Argument must be a number' if !x.is_a?(Numeric) || !y.is_a?(Numeric)
+
     @coordinates = [x, y]
   end
 
