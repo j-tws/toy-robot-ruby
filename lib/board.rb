@@ -2,7 +2,6 @@ class Board
   attr_reader :grid, :rows, :columns, :clean_grid
 
   CELL = '⬜'
-  # ROBOT = '🤖'
 
   def initialize(rows, columns)
     raise ArgumentError, 'Argument must be a number' if !rows.is_a?(Numeric) || !columns.is_a?(Numeric)
@@ -19,5 +18,6 @@ class Board
 
   def print_board
     puts @grid.map { |row| row.join(' ') }
+    puts "\n\n"
   end
 end

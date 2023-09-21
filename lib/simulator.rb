@@ -40,12 +40,34 @@ class Simulator
     @board.grid[-@robot.coordinates.last][@robot.coordinates.first - 1] = ROBOT
   end
 
+  def check_if_robot_hit_boundary(instruction)
+    return unless instruction == INSTRUCTIONS_SET[:A]
+
+    if @robot.coordinates.last == 1 && @robot.bearing == :south ||
+      @robot.coordinates.last == @board.rows && @robot.bearing == :north ||
+      @robot.coordinates.first == 1 && robot.bearing == :west || 
+      @robot.coordinates.first == @board.columns && @robot.bearing == :east
+
+      raise 'you have hit a wall'
+    end
+  end
+
   def evaluate(commands)
     instructions_to_run = instructions(commands)
 
     instructions_to_run.each do |instruction|
+      sleep 0.5
+      check_if_robot_hit_boundary(instruction)
+      system 'clear'
       @robot.send(instruction)
+      update_robot_location_on_board
+      @board.print_board
     end
   end
-  pry
+  # pry
 end
+
+s = Simulator.new
+s.setup_board(10,10)
+s.place(x: 3, y: 3, direction: :north)
+pry
