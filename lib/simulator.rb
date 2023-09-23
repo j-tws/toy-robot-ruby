@@ -30,8 +30,8 @@ class Simulator
       raise ArgumentError, 'Robot must be within grid confinement'
     end
 
-    @board.grid[-y][x - 1] = ROBOT
     @robot.at(x, y)
+    @board.grid[-@robot.coordinates.last][@robot.coordinates.first - 1] = ROBOT
     @robot.orient(direction)
   end
 
@@ -43,20 +43,19 @@ class Simulator
   def check_if_robot_hit_boundary(instruction)
     return unless instruction == INSTRUCTIONS_SET[:A]
 
-    if @robot.coordinates.last == 1 && @robot.bearing == :south ||
-      @robot.coordinates.last == @board.rows && @robot.bearing == :north ||
-      @robot.coordinates.first == 1 && robot.bearing == :west || 
-      @robot.coordinates.first == @board.columns && @robot.bearing == :east
+    return unless @robot.coordinates.last == 1 && @robot.bearing == :south
+    return unless @robot.coordinates.last == @board.rows && @robot.bearing == :north
+    return unless @robot.coordinates.first == 1 && robot.bearing == :west
+    return unless @robot.coordinates.first == @board.columns && @robot.bearing == :east
 
-      raise 'you have hit a wall'
-    end
+    raise 'you have hit a wall'
   end
 
   def evaluate(commands)
     instructions_to_run = instructions(commands)
 
     instructions_to_run.each do |instruction|
-      sleep 0.5
+      sleep 1
       check_if_robot_hit_boundary(instruction)
       system 'clear'
       @robot.send(instruction)
@@ -70,4 +69,4 @@ end
 s = Simulator.new
 s.setup_board(10,10)
 s.place(x: 3, y: 3, direction: :north)
-pry
+# pry
