@@ -10,45 +10,70 @@ class App
     @simulator = Simulator.new
   end
 
-  def run
+  def build_board
     loop do
-      # show start menu
-      @display.start_menu
-
-      # begin process of building board
       board_rows_input = @display.get_board_rows
       baord_columns_input = @display.get_board_columns
       @simulator.setup_board(board_rows_input, baord_columns_input)
+  
+      @display.build_board_complete_message
+      @display.print_board(@simulator.board, nil)
 
-      # show how board looks like after building
-      puts 'Here is how your board look like'
-      @simulator.board.print_board
+      break if @simulator.board
 
-      # begin placing robot
-      puts 'Now place where you want your robot to start'
+    rescue ArgumentError => e
+      puts e
+      next
+    end
+  end
+
+  def place_robot
+    @display.start_place_robot_message
+  
+    loop do
       robot_column_input = @display.get_robot_start_column
       robot_row_input = @display.get_robot_start_row
       robot_bearing_input = @display.get_robot_start_bearing
       @simulator.place(x: robot_column_input, y: robot_row_input, direction: robot_bearing_input)
 
-      puts 'This is where your robot start'
+      @display.show_robot_starting_position_message
+      # @display.print_board(@simulator.board, @simulator.robot)
       @simulator.board.print_board
 
-      # begin command input
-      puts 'Now the fun begins'
-      puts 'You can enter a series of commands where you will see your robot moving around the board'
+      break if @simulator.robot.bearing
+    rescue ArgumentError => e
+      puts e
+      next
+    end
+  end
 
-      loop do
-        puts 'Commands can be only either:'
-        puts "'R', which means ask the robot to turn right from where it is currently facing"
-        puts "'L', which means ask the robot to turn left from where it is currently facing"
-        puts "'A', which means ask the robot to advance one cell from where it is facing"
-  
-        commands = @display.get_user_commands
-        system 'clear'
-        @simulator.evaluate(commands)
-      end
+  def run_commands
+    @display.show_run_command_intro_message
+
+    loop do
+      @display.show_command_instructions
+
+      commands = @display.get_user_commands
+      system 'clear'
+      @simulator.evaluate(commands)
+      # @display.print_board(@simulator.board, @simulator.robot)
+      @simulator.board.print_board
+      puts 'Feel free to enter another set of commands'
+
+    rescue ArgumentError, Simulator::HitBoardBoundaryError => e
+      puts e
+      next
+    end
+  end
+
+  def run
+    loop do
+      @display.start_menu
+      build_board
+      place_robot
+      run_commands
     end
   end
 end
-pry
+
+App.new.run

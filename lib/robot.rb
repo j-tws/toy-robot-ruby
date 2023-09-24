@@ -3,7 +3,7 @@ class Robot
   attr_reader :bearing, :coordinates
 
   def orient(direction)
-    raise ArgumentError unless DIRECTION.include?(direction)
+    raise ArgumentError, 'Please only enter valid direction (north, south, east, or west)' unless DIRECTION.include?(direction)
 
     @bearing = direction
   end
@@ -21,7 +21,7 @@ class Robot
   end
 
   def at(x, y)
-    raise ArgumentError, 'Argument must be a number' if !x.is_a?(Numeric) || !y.is_a?(Numeric)
+    raise ArgumentError, 'Please only enter numbers for row and column' if !x.is_a?(Numeric) || !y.is_a?(Numeric)
 
     @coordinates = [x, y]
   end

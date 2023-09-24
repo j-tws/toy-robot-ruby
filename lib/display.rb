@@ -12,26 +12,26 @@ class Display
 
   def get_board_rows
     puts 'Enter the amount of rows you want to have for your board:'
-    gets.chomp.to_i
+    gets.chomp
   end
   
   def get_board_columns
     puts 'Enter the amount of columns you want to have for your board:'
-    gets.chomp.to_i
+    gets.chomp
   end
   
   def get_robot_start_row
-    puts "Let's start which row do you want to place your robot:"
-    gets.chomp.to_i
+    puts "Which row do you want to place your robot:"
+    gets.chomp
   end
   
   def get_robot_start_column
-    puts 'Which column do you want to place your robot:'
-    gets.chomp.to_i
+    puts "let's start which column do you want to place your robot:"
+    gets.chomp
   end
 
   def get_robot_start_bearing
-    puts 'Enter where you want your robot to face:'
+    puts "Enter where you want your robot to face (only enter 'north', 'south', 'east', 'west'):"
     gets.chomp.to_sym
   end
 
@@ -40,12 +40,40 @@ class Display
     gets.chomp
   end
 
-  # def run_app
-  #   loop do
-  #     start_menu
-  #     get_board_rows
-  #     get_board_columns
-  #     break
-  #   end
+  def build_board_complete_message
+    puts 'Here is how your board look like'
+  end
+
+  def start_place_robot_message
+    puts 'Now place where you want your robot to start'
+  end
+
+  def show_robot_starting_position_message
+    puts 'This is where your robot start'
+  end
+
+  def show_run_command_intro_message
+    puts 'Now the fun begins'
+    puts 'You can enter a series of commands where you will see your robot moving around the board'
+  end
+
+  def show_command_instructions
+    puts <<~COMMAND_INSTRUCTIONS
+        Commands can be only either:
+        R, which means ask the robot to turn right from where it is currently facing
+        L, which means ask the robot to turn left from where it is currently facing
+        A, which means ask the robot to advance one cell from where it is facing
+        \n
+        Example command: RLAR
+        It means it command the robot to turn right, turn left, advance a step, and finish by turning right
+      COMMAND_INSTRUCTIONS
+  end
+
+  # def print_board(board, robot)
+  #   puts "\n"
+  #   puts board.grid.map { |row| row.join(' ') }
+  #   puts "\n"
+  #   puts "Robot position: #{robot.coordinates}" if robot && robot.coordinates
+  #   puts "Robot bearing: #{robot.bearing}" if robot && robot.bearing
   # end
 end
