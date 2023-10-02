@@ -68,12 +68,4 @@ class Display
         It means it command the robot to turn right, turn left, advance a step, and finish by turning right
       COMMAND_INSTRUCTIONS
   end
-
-  # def print_board(board, robot)
-  #   puts "\n"
-  #   puts board.grid.map { |row| row.join(' ') }
-  #   puts "\n"
-  #   puts "Robot position: #{robot.coordinates}" if robot && robot.coordinates
-  #   puts "Robot bearing: #{robot.bearing}" if robot && robot.bearing
-  # end
 end

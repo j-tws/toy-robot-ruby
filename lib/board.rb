@@ -1,4 +1,3 @@
-require 'pry'
 class Board
   attr_reader :grid, :rows, :columns, :clean_grid
 
@@ -22,8 +21,18 @@ class Board
   end
 
   def print_board
-    puts @grid.map { |row| row.join(' ') }
+    x_axis = [*1..@columns].map{ |n| "#{n} "}
+    grid_with_x_axis = [*@grid, x_axis]
+ 
+    grid_with_x_and_y_axis = grid_with_x_axis.map.with_index do |row, index|
+      if index == @rows
+        [' ', *row].join(' ')
+      else
+        [@rows - index, *row].join(' ')
+      end
+    end
+
+    puts grid_with_x_and_y_axis
     puts "\n\n"
   end
 end
-# pry

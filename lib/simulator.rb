@@ -70,13 +70,17 @@ class Simulator
       system 'clear'
       @robot.send(instruction)
       update_robot_location_on_board
-      @board.print_board
+
+      print_board_with_robot_and_instruction_info(instruction)
     end
   end
-end
 
-# s = Simulator.new
-# s.setup_board('5','5')
-# s.place(x: '3', y: '3', direction: :west)
-# s.evaluate('AAAAA')
-# pry
+  def print_board_with_robot_and_instruction_info(instruction)
+    puts "Current command: #{instruction.to_s}"
+      puts "\n"
+      @board.print_board
+      puts "\n"
+      puts "Robot coordinates: #{@robot.coordinates}"
+      puts "Robot bearing: #{@robot.bearing}"
+  end
+end

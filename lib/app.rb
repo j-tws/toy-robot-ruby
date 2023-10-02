@@ -1,6 +1,5 @@
 require_relative 'display'
 require_relative 'simulator'
-require 'pry'
 
 class App
   attr_reader :display, :simulator
@@ -17,10 +16,9 @@ class App
       @simulator.setup_board(board_rows_input, baord_columns_input)
   
       @display.build_board_complete_message
-      @display.print_board(@simulator.board, nil)
+      @simulator.board.print_board
 
       break if @simulator.board
-
     rescue ArgumentError => e
       puts e
       next
@@ -37,7 +35,6 @@ class App
       @simulator.place(x: robot_column_input, y: robot_row_input, direction: robot_bearing_input)
 
       @display.show_robot_starting_position_message
-      # @display.print_board(@simulator.board, @simulator.robot)
       @simulator.board.print_board
 
       break if @simulator.robot.bearing
@@ -56,7 +53,6 @@ class App
       commands = @display.get_user_commands
       system 'clear'
       @simulator.evaluate(commands)
-      # @display.print_board(@simulator.board, @simulator.robot)
       @simulator.board.print_board
       puts 'Feel free to enter another set of commands'
 
