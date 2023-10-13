@@ -18,7 +18,7 @@ class App
       @display.build_board_complete_message
       @simulator.board.print_board
 
-      break if @simulator.board
+      return if @simulator.board
     rescue ArgumentError => e
       puts e
       next
@@ -37,7 +37,7 @@ class App
       @display.show_robot_starting_position_message
       @simulator.board.print_board
 
-      break if @simulator.robot.bearing
+      return if @simulator.robot.bearing
     rescue ArgumentError => e
       puts e
       next

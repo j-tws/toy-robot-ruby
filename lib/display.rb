@@ -12,32 +12,32 @@ class Display
 
   def get_board_rows
     puts 'Enter the amount of rows you want to have for your board:'
-    gets.chomp
+    exit_or_proceed(gets.chomp)
   end
   
   def get_board_columns
     puts 'Enter the amount of columns you want to have for your board:'
-    gets.chomp
+    exit_or_proceed(gets.chomp)
   end
   
   def get_robot_start_row
     puts "Which row do you want to place your robot:"
-    gets.chomp
+    exit_or_proceed(gets.chomp)
   end
   
   def get_robot_start_column
     puts "let's start which column do you want to place your robot:"
-    gets.chomp
+    exit_or_proceed(gets.chomp)
   end
 
   def get_robot_start_bearing
     puts "Enter where you want your robot to face (only enter 'north', 'south', 'east', 'west'):"
-    gets.chomp.to_sym
+    exit_or_proceed(gets.chomp).to_sym
   end
 
   def get_user_commands
     puts 'Enter your commands here:'
-    gets.chomp
+    exit_or_proceed(gets.chomp)
   end
 
   def build_board_complete_message
@@ -67,5 +67,9 @@ class Display
         Example command: RLAR
         It means it command the robot to turn right, turn left, advance a step, and finish by turning right
       COMMAND_INSTRUCTIONS
+  end
+
+  def exit_or_proceed(input)
+    input == 'exit' ? exit(true) : input
   end
 end
