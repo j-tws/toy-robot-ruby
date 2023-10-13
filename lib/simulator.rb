@@ -2,8 +2,8 @@ require_relative 'board'
 require_relative 'robot'
 
 class Simulator
-  class HitBoardBoundaryError < StandardError
-  end
+  class HitBoardBoundaryError < StandardError; end
+  class NoBoardError < StandardError; end
 
   attr_reader :robot, :board
 
@@ -28,6 +28,7 @@ class Simulator
   end
 
   def place(x:, y:, direction:)
+    raise NoBoardError, 'Please create a board first' if !@board
     raise ArgumentError, 'Please enter numbers only for rows and columns' if x.scan(/\D/).any? || y.scan(/\D/).any?
 
     x_number = x.to_i
@@ -77,10 +78,10 @@ class Simulator
 
   def print_board_with_robot_and_instruction_info(instruction)
     puts "Current command: #{instruction.to_s}"
-      puts "\n"
-      @board.print_board
-      puts "\n"
-      puts "Robot coordinates: #{@robot.coordinates}"
-      puts "Robot bearing: #{@robot.bearing}"
+    puts "\n"
+    @board.print_board
+    puts "\n"
+    puts "Robot coordinates: #{@robot.coordinates}"
+    puts "Robot bearing: #{@robot.bearing}"
   end
 end
