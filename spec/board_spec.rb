@@ -11,7 +11,7 @@ RSpec.describe Board do
         expect(board.grid).to eq([
           ['⬜', '⬜', '⬜'],
           ['⬜', '⬜', '⬜'],
-          ['⬜', '⬜', '⬜'],
+          ['⬜', '⬜', '⬜']
         ])
       end
     end
@@ -39,7 +39,7 @@ RSpec.describe Board do
       expect(board.grid).to eq([
         ['⬜', '⬜', '⬜'],
         ['⬜', '⬜', '⬜'],
-        ['⬜', '⬜', '⬜'],
+        ['⬜', '⬜', '⬜']
       ])
     end
   end

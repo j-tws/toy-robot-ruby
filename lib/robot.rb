@@ -32,7 +32,7 @@ class Robot
       @coordinates[0] += 1
     when :south
       @coordinates[1] -= 1
-    else :west
+    else
       @coordinates[0] -= 1
     end
   end

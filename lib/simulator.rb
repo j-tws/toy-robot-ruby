@@ -11,7 +11,7 @@ class Simulator
   INSTRUCTIONS_SET = {
     L: :turn_left,
     R: :turn_right,
-    A: :advance,
+    A: :advance
   }
 
   ROBOT = '🤖'
@@ -23,17 +23,17 @@ class Simulator
   def setup_board(x, y)
     @board = Board.new(x, y)
   end
-  
+
   def instructions(string)
-    string.split('').map{ |char| INSTRUCTIONS_SET[char.to_sym] }
+    string.split('').map { |char| INSTRUCTIONS_SET[char.to_sym] }
   end
 
   def place(x:, y:, direction:)
-    raise NoBoardError, 'Please create a board first' if !@board
+    raise NoBoardError, 'Please create a board first' unless @board
 
     raise ArgumentError, 'Please only enter numbers for row and column' if x.is_a?(String) || y.is_a?(String)
 
-    if x > @board.columns || y > @board.rows || x < 1 || y < 1 
+    if x > @board.columns || y > @board.rows || x < 1 || y < 1
       raise ArgumentError, "Robot must be within grid confinement (number of rows: #{@board.rows}, number of columns: #{@board.columns}"
     end
 
@@ -51,9 +51,9 @@ class Simulator
     return unless instruction == INSTRUCTIONS_SET[:A]
 
     if @robot.coordinates.last == 1 && @robot.bearing == :south ||
-     @robot.coordinates.last == @board.rows && @robot.bearing == :north ||
-     @robot.coordinates.first == 1 && robot.bearing == :west ||
-     @robot.coordinates.first == @board.columns && @robot.bearing == :east
+       @robot.coordinates.last == @board.rows && @robot.bearing == :north ||
+       @robot.coordinates.first == 1 && robot.bearing == :west ||
+       @robot.coordinates.first == @board.columns && @robot.bearing == :east
 
       raise HitBoardBoundaryError, "You've hit a wall :( all upcoming commands are cancelled"
     end
@@ -76,7 +76,7 @@ class Simulator
   end
 
   def print_board_with_robot_and_instruction_info(instruction)
-    puts "Current command: #{instruction.to_s}"
+    puts "Current command: #{instruction}"
     puts "\n"
     @board.print_board
     puts "\n"

@@ -26,16 +26,16 @@ RSpec.describe Simulator do
   end
 
   context '#place' do
-    it 'should raise error if there is no board' do 
+    it 'should raise error if there is no board' do
       expect { subject.place(x: 3, y: 3, direction: :north) }.to raise_error(Simulator::NoBoardError)
     end
 
-    it 'should raise error if x and y arguments are not digits' do 
+    it 'should raise error if x and y arguments are not digits' do
       subject.setup_board(3, 3)
       expect { subject.place(x: 'hello', y: 'world', direction: :north) }.to raise_error(ArgumentError)
     end
 
-    it 'should raise error if x and y arguments are out of board boundaries' do 
+    it 'should raise error if x and y arguments are out of board boundaries' do
       subject.setup_board(3, 3)
       expect { subject.place(x: 5, y: 5, direction: :north) }.to raise_error(ArgumentError)
     end
@@ -54,7 +54,7 @@ RSpec.describe Simulator do
           ['⬜', '⬜', '⬜', '⬜', '⬜'],
           ['⬜', '⬜', '🤖', '⬜', '⬜'],
           ['⬜', '⬜', '⬜', '⬜', '⬜'],
-          ['⬜', '⬜', '⬜', '⬜', '⬜'],
+          ['⬜', '⬜', '⬜', '⬜', '⬜']
         ])
       end
     end
@@ -92,11 +92,11 @@ RSpec.describe Simulator do
       subject.evaluate('RALA')
       expect(subject.robot.coordinates).to eq([4, 4])
       expect(subject.board.grid).to eq([
-        ['⬜', '⬜', '⬜', '⬜', '⬜','⬜'],
-        ['⬜', '⬜', '⬜', '🤖', '⬜','⬜'],
-        ['⬜', '⬜', '⬜', '⬜', '⬜','⬜'],
-        ['⬜', '⬜', '⬜', '⬜', '⬜','⬜'],
-        ['⬜', '⬜', '⬜', '⬜', '⬜','⬜'],
+        ['⬜', '⬜', '⬜', '⬜', '⬜', '⬜'],
+        ['⬜', '⬜', '⬜', '🤖', '⬜', '⬜'],
+        ['⬜', '⬜', '⬜', '⬜', '⬜', '⬜'],
+        ['⬜', '⬜', '⬜', '⬜', '⬜', '⬜'],
+        ['⬜', '⬜', '⬜', '⬜', '⬜', '⬜']
         ])
       expect(subject.robot.bearing).to eq(:north)
     end
@@ -105,15 +105,15 @@ RSpec.describe Simulator do
       subject.evaluate('AALAALAALARAALAA')
       expect(subject.robot.coordinates).to eq([4, 1])
       expect(subject.board.grid).to eq([
-        ['⬜', '⬜', '⬜', '⬜', '⬜','⬜'],
-        ['⬜', '⬜', '⬜', '⬜', '⬜','⬜'],
-        ['⬜', '⬜', '⬜', '⬜', '⬜','⬜'],
-        ['⬜', '⬜', '⬜', '⬜', '⬜','⬜'],
-        ['⬜', '⬜', '⬜', '🤖', '⬜','⬜'],
+        ['⬜', '⬜', '⬜', '⬜', '⬜', '⬜'],
+        ['⬜', '⬜', '⬜', '⬜', '⬜', '⬜'],
+        ['⬜', '⬜', '⬜', '⬜', '⬜', '⬜'],
+        ['⬜', '⬜', '⬜', '⬜', '⬜', '⬜'],
+        ['⬜', '⬜', '⬜', '🤖', '⬜', '⬜']
         ])
       expect(subject.robot.bearing).to eq(:east)
     end
-      
+
     it 'should raise error when robot is about to collide with boundary' do
       expect { subject.evaluate('AAAA') }.to raise_error(Simulator::HitBoardBoundaryError)
     end

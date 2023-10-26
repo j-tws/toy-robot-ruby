@@ -14,7 +14,7 @@ class App
       board_rows_input = @display.get_board_rows
       baord_columns_input = @display.get_board_columns
       @simulator.setup_board(board_rows_input, baord_columns_input)
-  
+
       @display.build_board_complete_message
       @simulator.board.print_board
 
@@ -27,7 +27,7 @@ class App
 
   def place_robot
     @display.start_place_robot_message
-  
+
     loop do
       robot_column_input = @display.get_robot_start_column
       robot_row_input = @display.get_robot_start_row
@@ -55,7 +55,6 @@ class App
       @simulator.evaluate(commands)
       @simulator.board.print_board
       puts 'Feel free to enter another set of commands'
-
     rescue ArgumentError, Simulator::HitBoardBoundaryError => e
       puts e
       next

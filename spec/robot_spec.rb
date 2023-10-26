@@ -94,7 +94,7 @@ RSpec.describe Robot do
   context '#at' do
     it 'should set coordinates for robot' do
       subject.at(1, 5)
-      
+
       expect(subject.coordinates).to eq([1, 5])
     end
 
@@ -109,21 +109,21 @@ RSpec.describe Robot do
     it 'should advance correctly when robot is facing north' do
       subject.orient(:north)
       subject.advance
-      
+
       expect(subject.coordinates).to eq([1, 2])
     end
 
     it 'should advance correctly when robot is facing east' do
       subject.orient(:east)
       subject.advance
-      
+
       expect(subject.coordinates).to eq([2, 1])
     end
 
     it 'should advance correctly when robot is facing south' do
       subject.orient(:south)
       subject.advance
-      
+
       expect(subject.coordinates).to eq([1, 0])
     end
   end

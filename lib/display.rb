@@ -25,17 +25,17 @@ class Display
     puts 'Enter the amount of rows you want to have for your board:'
     parse_input_to_integer
   end
-  
+
   def get_board_columns
     puts 'Enter the amount of columns you want to have for your board:'
     parse_input_to_integer
   end
-  
+
   def get_robot_start_row
-    puts "Which row do you want to place your robot:"
+    puts 'Which row do you want to place your robot:'
     parse_input_to_integer
   end
-  
+
   def get_robot_start_column
     puts "let's start which column do you want to place your robot:"
     parse_input_to_integer
@@ -70,14 +70,14 @@ class Display
 
   def show_command_instructions
     puts <<~COMMAND_INSTRUCTIONS
-        Commands can be only either:
-        R, which means ask the robot to turn right from where it is currently facing
-        L, which means ask the robot to turn left from where it is currently facing
-        A, which means ask the robot to advance one cell from where it is facing
-        \n
-        Example command: RLAR
-        It means it command the robot to turn right, turn left, advance a step, and finish by turning right
-      COMMAND_INSTRUCTIONS
+      Commands can be only either:
+      R, which means ask the robot to turn right from where it is currently facing
+      L, which means ask the robot to turn left from where it is currently facing
+      A, which means ask the robot to advance one cell from where it is facing
+      \n
+      Example command: RLAR
+      It means it command the robot to turn right, turn left, advance a step, and finish by turning right
+    COMMAND_INSTRUCTIONS
   end
 
   def exit_or_proceed(input)

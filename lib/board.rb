@@ -18,9 +18,9 @@ class Board
   end
 
   def print_board
-    x_axis = [*1..@columns].map{ |n| "#{n} "}
+    x_axis = [*1..@columns].map { |n| "#{n} " }
     grid_with_x_axis = [*@grid, x_axis]
- 
+
     grid_with_x_and_y_axis = grid_with_x_axis.map.with_index do |row, index|
       if index == @rows
         [' ', *row].join(' ')
