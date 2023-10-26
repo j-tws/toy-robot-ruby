@@ -10,24 +10,35 @@ class Display
     START_MENU
   end
 
+  def parse_input_to_integer
+    input = gets.chomp
+    if input == 'exit'
+      exit(true)
+    elsif input.scan(/\D/).any?
+      input
+    else
+      input.to_i
+    end
+  end
+
   def get_board_rows
     puts 'Enter the amount of rows you want to have for your board:'
-    exit_or_proceed(gets.chomp)
+    parse_input_to_integer
   end
   
   def get_board_columns
     puts 'Enter the amount of columns you want to have for your board:'
-    exit_or_proceed(gets.chomp)
+    parse_input_to_integer
   end
   
   def get_robot_start_row
     puts "Which row do you want to place your robot:"
-    exit_or_proceed(gets.chomp)
+    parse_input_to_integer
   end
   
   def get_robot_start_column
     puts "let's start which column do you want to place your robot:"
-    exit_or_proceed(gets.chomp)
+    parse_input_to_integer
   end
 
   def get_robot_start_bearing

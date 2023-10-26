@@ -1,5 +1,6 @@
 require_relative 'board'
 require_relative 'robot'
+require 'pry'
 
 class Simulator
   class HitBoardBoundaryError < StandardError; end
@@ -29,16 +30,14 @@ class Simulator
 
   def place(x:, y:, direction:)
     raise NoBoardError, 'Please create a board first' if !@board
-    raise ArgumentError, 'Please enter numbers only for rows and columns' if x.scan(/\D/).any? || y.scan(/\D/).any?
 
-    x_number = x.to_i
-    y_number = y.to_i
+    raise ArgumentError, 'Please only enter numbers for row and column' if x.is_a?(String) || y.is_a?(String)
 
-    if x_number > @board.columns || y_number > @board.rows || x_number < 1 || y_number < 1 
+    if x > @board.columns || y > @board.rows || x < 1 || y < 1 
       raise ArgumentError, "Robot must be within grid confinement (number of rows: #{@board.rows}, number of columns: #{@board.columns}"
     end
 
-    @robot.at(x_number, y_number)
+    @robot.at(x, y)
     @board.grid[-@robot.coordinates.last][@robot.coordinates.first - 1] = ROBOT
     @robot.orient(direction)
   end

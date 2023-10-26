@@ -4,15 +4,12 @@ class Board
   CELL = '⬜'
 
   def initialize(rows, columns)
-    raise ArgumentError, 'Please enter numbers only for rows and columns' if rows.scan(/\D/).any? || columns.scan(/\D/).any?
+    raise ArgumentError, 'Please enter numbers only for rows and columns' if rows.is_a?(String) || columns.is_a?(String)
 
-    rows_number = rows.to_i
-    columns_number = columns.to_i
+    raise ArgumentError, 'Number must be more than 0 for both rows and columns' if rows <= 0 || columns <= 0
 
-    raise ArgumentError, 'Number must be more than 0 for both rows and columns' if rows_number <= 0 || columns_number <= 0
-
-    @rows = rows_number
-    @columns = columns_number
+    @rows = rows
+    @columns = columns
     @grid = Array.new(@rows) { Array.new(@columns, CELL) }
   end
 
