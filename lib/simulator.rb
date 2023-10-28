@@ -12,9 +12,9 @@ class Simulator
     L: :turn_left,
     R: :turn_right,
     A: :advance
-  }
+  }.freeze
 
-  ROBOT = '🤖'
+  ROBOT = '🤖'.freeze
 
   def initialize
     @robot = Robot.new
