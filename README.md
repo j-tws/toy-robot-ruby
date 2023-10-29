@@ -3,19 +3,19 @@
 A simple toy robot CLI app that I just do for fun, and it is an expansion to this [exercism toy robot simulator exercise](https://exercism.org/tracks/ruby/exercises/robot-simulator). Since this is a popular programming exercise among devs and I have not done it before.
 
 ## Getting started
-1. Clone this repo:
-`git clone https://github.com/j-tws/toy-robot-ruby.git`
+1. Clone this repo in your desired folder:
+`make clone`
 
 2. Run dependencies:
-`bundle i`
+`make run`
 
 3. Run the app:
-`ruby lib/app.rb`
+`make app`
 
 ## What to expect
 You will be given a series of instructions printed and all you need to do is to follow the prompts!
 
-**NOTE:** If anytime you want to exit the app, just input `exit` and the app will quit.  
+**NOTE:** If anytime you want to exit the app, just input `exit` and the app will quit. 
 
 ### First part - Intro and board creation
 Here you will be asked to create your board by inputing the amount of rows and columns you want.
