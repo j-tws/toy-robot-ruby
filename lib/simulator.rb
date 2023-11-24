@@ -65,7 +65,8 @@ class Simulator
     instructions_to_run = instructions(commands)
 
     instructions_to_run.each do |instruction|
-      sleep 1
+      sleep 1 unless defined?(RSpec)
+
       check_if_robot_hit_boundary(instruction)
       system 'clear'
       @robot.send(instruction)
