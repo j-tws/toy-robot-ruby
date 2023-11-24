@@ -68,20 +68,11 @@ class Simulator
       sleep 1 unless defined?(RSpec)
 
       check_if_robot_hit_boundary(instruction)
-      system 'clear'
+      system 'clear' if block_given?
       @robot.send(instruction)
       update_robot_location_on_board
 
-      print_board_with_robot_and_instruction_info(instruction)
+      yield(instruction) if block_given?
     end
-  end
-
-  def print_board_with_robot_and_instruction_info(instruction)
-    puts "Current command: #{instruction}"
-    puts "\n"
-    @board.print_board
-    puts "\n"
-    puts "Robot coordinates: #{@robot.coordinates}"
-    puts "Robot bearing: #{@robot.bearing}"
   end
 end
