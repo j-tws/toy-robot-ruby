@@ -21,6 +21,8 @@ class Robot
   end
 
   def at(x, y)
+    raise ArgumentError, 'Please only enter numbers for row and column' if !x.is_a?(Integer) || !y.is_a?(Integer)
+
     @coordinates = [x, y]
   end
 
