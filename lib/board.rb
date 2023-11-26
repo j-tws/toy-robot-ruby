@@ -17,19 +17,16 @@ class Board
     @grid = Array.new(@rows) { Array.new(@columns, CELL) }
   end
 
-  def print_board
+  def board_with_axis
     x_axis = [*1..@columns].map { |n| "#{n} " }
     grid_with_x_axis = [*@grid, x_axis]
 
-    grid_with_x_and_y_axis = grid_with_x_axis.map.with_index do |row, index|
+    grid_with_x_axis.map.with_index do |row, index|
       if index == @rows
         [' ', *row].join(' ')
       else
         [@rows - index, *row].join(' ')
       end
     end
-
-    puts grid_with_x_and_y_axis
-    puts "\n\n"
   end
 end

@@ -83,4 +83,26 @@ class Display
   def exit_or_proceed(input)
     input == 'exit' ? exit(true) : input
   end
+
+  def enter_another_command
+    puts 'Feel free to enter another set of commands'
+  end
+
+  def print_error(error)
+    puts error
+  end
+
+  def print_board(board)
+    puts board
+    puts "\n\n"
+  end
+
+  def print_outcome(robot, board, instruction)
+    puts "Current command: #{instruction}"
+    puts "\n"
+    puts board.board_with_axis
+    puts "\n"
+    puts "Robot coordinates: #{robot.coordinates}"
+    puts "Robot bearing: #{robot.bearing}"
+  end
 end
